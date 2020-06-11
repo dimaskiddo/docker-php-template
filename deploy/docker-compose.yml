@@ -1,0 +1,86 @@
+version: '2'
+
+networks:
+  phpnet:
+    driver: bridge
+
+services:
+  mariadb:
+    image: 'dimaskiddo/debian:mariadb-10.2'
+    working_dir: /var/lib/mysql/data
+    networks:
+      - phpnet
+    env_file:
+      - ../env/dev/mariadb.env
+    volumes:
+      - ../data/mariadb:/var/lib/mysql/data
+    restart: unless-stopped
+
+  redis:
+    image: 'dimaskiddo/alpine:redis-3.2'
+    working_dir: /var/lib/redis/data
+    networks:
+      - phpnet
+    env_file:
+      - ../env/dev/redis.env
+    volumes:
+      - ../data/redis:/var/lib/redis/data
+    restart: unless-stopped
+
+  minio:
+    image: 'dimaskiddo/alpine:minio-1.0'
+    working_dir: /data/minio
+    networks:
+      - phpnet
+    ports:
+      - 9000:9000
+    env_file:
+      - ../env/dev/minio.env
+    volumes:
+      - ../data/minio:/data/minio
+    restart: unless-stopped
+
+  adminer:
+    image: 'dimaskiddo/alpine:adminer-4.6.2'
+    working_dir: /var/www/data/html
+    networks:
+      - phpnet
+    ports:
+      - 8080:8080
+    restart: unless-stopped
+    depends_on:
+      - mariadb
+
+  node:
+    build:
+      context: ../build/nodejs
+      dockerfile: ./Dockerfile
+    image: 'app:nodejs-10'
+    working_dir: /usr/src/app
+    command: tail -F /dev/null
+    networks:
+      - phpnet
+    volumes:
+      - ../data/php/html:/usr/src/app
+    restart: unless-stopped
+
+  php:
+    build:
+      context: ../build/php
+      dockerfile: ./Dockerfile
+    image: 'app:php-7.2-nginx'
+    working_dir: /var/www/html
+    networks:
+      - phpnet
+    ports:
+      - 80:8080
+      - 443:8443
+    env_file:
+      - ../env/dev/php.env
+    volumes:
+      - ../data/php:/var/www
+    restart: unless-stopped
+    depends_on:
+      - adminer
+      - mariadb
+      - redis

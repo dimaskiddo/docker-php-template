@@ -1,0 +1,30 @@
+version: '2'
+
+services:
+  minio:
+    # env_file:
+    #   - ../env/custom/minio.env
+    # volumes:
+    #   - /path/to/app/minio:/data/minio
+
+  mariadb:
+    # env_file:
+    #   - ../env/custom/mariadb.env
+    # volumes:
+    #   - /path/to/app/mariadb:/var/lib/mysql/data
+
+  redis:
+    # env_file:
+    #   - ../env/custom/redis.env
+    # volumes:
+    #   - /path/to/app/redis:/var/lib/redis/data
+
+  node:
+    # volumes:
+    #   - /path/to/php/app/html:/usr/src/app
+
+  php:
+    # env_file:
+    #   - ../env/custom/php.env
+    # volumes:
+    #   - /path/to/php/app:/var/www
