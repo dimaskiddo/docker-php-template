@@ -20,9 +20,9 @@ Standard deployment:
 ```
 git clone -b master https://github.com/dimaskiddo/docker-php-template.git .
 ```
-* Prepare ```data/php/html``` directory
+* Prepare ```data/web/html``` directory
 ```
-mkdir -p data/php/html
+mkdir -p data/web/html
 ```
 * Change environment variables in ```env/dev``` directory
 * Goto ```deploy``` directory
@@ -41,7 +41,7 @@ docker-compose up -d php
 Additional deployment:
 * Start additional services like NodeJS and MinIO
 ```
-docker-compose up -d nodejs minio
+docker-compose up -d node minio
 ```
 * Check running services information
 ```
