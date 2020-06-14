@@ -56,32 +56,31 @@ services:
 
   node:
     build:
-      context: ../build/nodejs
+      context: ../build/node
       dockerfile: ./Dockerfile
-    image: 'app:nodejs-10'
+    image: 'app:node'
     working_dir: /usr/src/app
-    command: tail -F /dev/null
     networks:
       - phpnet
     volumes:
-      - ../data/php/html:/usr/src/app
+      - ../data/web/html:/usr/src/app
     restart: unless-stopped
 
-  php:
+  web:
     build:
-      context: ../build/php
+      context: ../build/web
       dockerfile: ./Dockerfile
-    image: 'app:php-7.1-nginx'
-    working_dir: /var/www/data/html
+    image: 'app:web'
+    working_dir: /var/www/html
     networks:
       - phpnet
     ports:
       - 80:8080
       - 443:8443
     env_file:
-      - ../env/dev/php.env
+      - ../env/dev/web.env
     volumes:
-      - ../data/php:/var/www/data
+      - ../data/web:/var/www
     restart: unless-stopped
     depends_on:
       - adminer

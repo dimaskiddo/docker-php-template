@@ -22,10 +22,10 @@ services:
   
   node:
     # volumes:
-    #   - /path/to/php/app/html:/usr/src/app
+    #   - /path/to/app/web/html:/usr/src/app
 
-  php:
+  web:
     # env_file:
-    #   - ../env/custom/php.env
+    #   - ../env/custom/web.env
     # volumes:
-    #   - /path/to/php/app:/var/www
+    #   - /path/to/app/web:/var/www

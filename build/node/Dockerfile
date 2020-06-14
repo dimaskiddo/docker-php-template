@@ -8,10 +8,12 @@ USER root
 RUN apk add --no-cache --update \
       python \
       python-dev \
-    && npm i -g \
-        npm \
-        node-gyp \
+      ncurses \
+    && mkdir -p .npm \
     && chown -R 1000:1000 .npm
 
 # Run as Non-Root User
 USER user
+
+# Run Command
+CMD ["tail","-F","/dev/null"]
