@@ -10,10 +10,13 @@ services:
     working_dir: /var/lib/mysql/data
     networks:
       - phpnet
+    environment:
+      - MYSQL_DEFAULTS_FILE=/etc/mysql-config/my.cnf
     env_file:
       - ../env/dev/mariadb.env
     volumes:
-      - ../data/mariadb:/var/lib/mysql/data
+      - ../data/mariadb/config:/etc/mysql-config
+      - ../data/mariadb/data:/var/lib/mysql/data
     restart: unless-stopped
 
   redis:
@@ -68,8 +71,8 @@ services:
     build:
       context: ../build/php
       dockerfile: ./Dockerfile
-    image: 'app:php-7.2-nginx'
-    working_dir: /var/www/html
+    image: 'app:php-7.1-nginx'
+    working_dir: /var/www/data/html
     networks:
       - phpnet
     ports:
@@ -78,7 +81,7 @@ services:
     env_file:
       - ../env/dev/php.env
     volumes:
-      - ../data/php:/var/www
+      - ../data/php:/var/www/data
     restart: unless-stopped
     depends_on:
       - adminer

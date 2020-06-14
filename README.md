@@ -20,8 +20,12 @@ Standard deployment:
 ```
 git clone -b master https://github.com/dimaskiddo/docker-php-template.git .
 ```
-* Change any environment variables in ```env/dev``` directory
-* After that goto ```deploy``` directory
+* Prepare ```data/php/html``` directory
+```
+mkdir -p data/php/html
+```
+* Change environment variables in ```env/dev``` directory
+* Goto ```deploy``` directory
 ```
 cd deploy
 ```

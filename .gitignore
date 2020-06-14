@@ -1,2 +1,5 @@
-data/*/*
+data/mariadb/data/*
+data/redis/*
+data/minio/*
+data/php/*
 !*.gitkeep

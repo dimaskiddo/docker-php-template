@@ -1,11 +1,11 @@
-FROM dimaskiddo/debian:php-7.2-nginx-novol
+FROM dimaskiddo/alpine:php-7.1-nginx-novol
 MAINTAINER Team Name <team@mail.com>
 
 # Run as Root User
 USER root
 
 # Do Some Customization if Needed Here
-RUN apt-get update
+RUN apk add --no-cache --update
 
 # Run as Non-Root User
 USER user
