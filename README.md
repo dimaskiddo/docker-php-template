@@ -35,7 +35,7 @@ docker-compose build
 ```
 * Start PHP environment services
 ```
-docker-compose up -d php
+docker-compose up -d web
 ```
 
 Additional deployment:
