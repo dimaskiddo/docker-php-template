@@ -6,14 +6,13 @@
 CURR_DIR=`pwd`
 
 
+echo "Resetting Deployment..."
+echo "----------------------------------------------------"
+
 DEPLOY_DIR=${DEPLOY_DIR:-"$CURR_DIR/deploy"}
 if [[ ! -d $DEPLOY_DIR ]]; then
   echo "ERROR! Deployment Directory doesn't exist!"
 fi
-
-
-echo "Resetting Deployment..."
-echo "----------------------------------------------------"
 
 echo "- Cleaning-up Deployment"
 cd "${DEPLOY_DIR}" \

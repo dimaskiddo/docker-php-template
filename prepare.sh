@@ -6,12 +6,6 @@
 CURR_DIR=`pwd`
 
 
-DEPLOY_DIR=${DEPLOY_DIR:-"$CURR_DIR/deploy"}
-if [[ ! -d $DEPLOY_DIR ]]; then
-  echo "ERROR! Deployment Directory doesn't exist!"
-fi
-
-
 echo "Preparing Data Directory..."
 echo "----------------------------------------------------"
 
