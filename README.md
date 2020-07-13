@@ -116,4 +116,4 @@ You can access / connect to your MinIO cache with information below
 
 * **Dimas Restu Hidayanto** - *Initial Work* - [DimasKiddo](https://github.com/dimaskiddo)
 
-See also the list of [contributors](https://github.com/dimaskiddo/go-whatsapp-rest/contributors) who participated in this project
+See also the list of [contributors](https://github.com/dimaskiddo/docker-php-template/contributors) who participated in this project
