@@ -6,7 +6,7 @@ networks:
 
 services:
   mariadb:
-    image: 'dimaskiddo/debian:mariadb-10.2'
+    image: 'dimaskiddo/debian-buster:mariadb-10.2'
     working_dir: /var/lib/mysql/data
     networks:
       - phpnet
@@ -20,7 +20,7 @@ services:
     restart: unless-stopped
 
   redis:
-    image: 'dimaskiddo/alpine:redis-3.2'
+    image: 'dimaskiddo/alpine:redis-6.2'
     working_dir: /var/lib/redis/data
     networks:
       - phpnet
@@ -31,7 +31,7 @@ services:
     restart: unless-stopped
 
   minio:
-    image: 'dimaskiddo/alpine:minio-1.0'
+    image: 'dimaskiddo/debian-buster:minio-1.0'
     working_dir: /data/minio
     networks:
       - phpnet
