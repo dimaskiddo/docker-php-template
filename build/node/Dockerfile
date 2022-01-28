@@ -1,4 +1,4 @@
-FROM dimaskiddo/alpine:nodejs-10
+FROM dimaskiddo/alpine:nodejs-14
 MAINTAINER Team Name <team@mail.com>
 
 # Run as Root User
