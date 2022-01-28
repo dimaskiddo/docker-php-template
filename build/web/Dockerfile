@@ -1,4 +1,4 @@
-FROM dimaskiddo/debian:php-7.4-nginx-novol
+FROM dimaskiddo/debian-buster:php-7.4-nginx-novol
 MAINTAINER Team Name <team@mail.com>
 
 # Run as Root User
