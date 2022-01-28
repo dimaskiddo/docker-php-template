@@ -1,19 +1,11 @@
-FROM dimaskiddo/alpine:nodejs-14
+FROM dimaskiddo/debian-buster:nodejs-14
 MAINTAINER Team Name <team@mail.com>
 
 # Run as Root User
 USER root
 
 # Do Some Customization if Needed Here
-RUN apk add --no-cache --update \
-      python \
-      python-dev \
-      ncurses \
-    && mkdir -p .npm \
-    && chown -R 1000:1000 .npm
+RUN apt-get update
 
 # Run as Non-Root User
 USER user
-
-# Run Command
-CMD ["tail","-F","/dev/null"]
