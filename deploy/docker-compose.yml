@@ -20,14 +20,14 @@ services:
     restart: unless-stopped
 
   redis:
-    image: 'dimaskiddo/alpine:redis-6.2'
-    working_dir: /var/lib/redis/data
+    image: 'dimaskiddo/alpine:keydb-6.2'
+    working_dir: /var/lib/keydb/data
     networks:
       - phpnet
     env_file:
       - ../env/dev/redis.env
     volumes:
-      - ../data/redis:/var/lib/redis/data
+      - ../data/redis:/var/lib/keydb/data
     restart: unless-stopped
 
   minio:
