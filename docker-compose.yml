@@ -1,0 +1,87 @@
+version: '2'
+
+networks:
+  phpnet:
+    driver: bridge
+
+services:
+  mariadb:
+    image: 'dimaskiddo/debian-buster:mariadb-10.6'
+    working_dir: /var/lib/mysql/data
+    networks:
+      - phpnet
+    environment:
+      - MYSQL_DEFAULTS_FILE=/etc/mysql-config/my.cnf
+    env_file:
+      - ./env/mariadb.env
+    volumes:
+      - ./data/mariadb/config:/etc/mysql-config
+      - ./data/mariadb/data:/var/lib/mysql/data
+    restart: unless-stopped
+
+  redis:
+    image: 'dimaskiddo/alpine:redis-6.2'
+    working_dir: /var/lib/redis/data
+    networks:
+      - phpnet
+    env_file:
+      - ./env/redis.env
+    volumes:
+      - ./data/redis:/var/lib/redis/data
+    restart: unless-stopped
+
+  minio:
+    image: 'dimaskiddo/debian-buster:minio-1.0'
+    working_dir: /data/minio
+    networks:
+      - phpnet
+    ports:
+      - 9000:9000
+    env_file:
+      - ./env/minio.env
+    volumes:
+      - ./data/minio:/data/minio
+    restart: unless-stopped
+
+  adminer:
+    image: 'adminer:standalone'
+    networks:
+      - phpnet
+    ports:
+      - 3000:8080
+    env_file:
+      - ./env/adminer.env
+    restart: unless-stopped
+    depends_on:
+      - mariadb
+
+  node:
+    build:
+      context: ./build/node
+      dockerfile: ./Dockerfile
+    image: 'app:node'
+    working_dir: /usr/src/app
+    networks:
+      - phpnet
+    volumes:
+      - ./data/web/html:/usr/src/app
+    restart: unless-stopped
+
+  web:
+    build:
+      context: ./build/web
+      dockerfile: ./Dockerfile
+    image: 'app:web'
+    working_dir: /var/www/html
+    networks:
+      - phpnet
+    ports:
+      - 8080:8080
+      - 8443:8443
+    volumes:
+      - ./data/web:/var/www
+    restart: unless-stopped
+    depends_on:
+      - adminer
+      - mariadb
+      - redis
