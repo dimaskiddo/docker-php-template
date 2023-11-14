@@ -9,20 +9,11 @@ CURR_DIR=`pwd`
 echo "Resetting Deployment..."
 echo "----------------------------------------------------"
 
-DEPLOY_DIR=${DEPLOY_DIR:-"$CURR_DIR/deploy"}
-if [[ ! -d $DEPLOY_DIR ]]; then
-  echo "ERROR! Deployment Directory doesn't exist!"
-fi
-
 echo "- Cleaning-up Deployment"
-cd "${DEPLOY_DIR}" \
-&& docker-compose down --volumes \
-&& cd "$CURR_DIR"
+docker compose down --volumes \
 
 echo "- Cleaning-up Docker System"
-echo ""
-echo "Please input your 'sudo' password if asked!"
-sudo docker system prune -f
+docker system prune -f
 
 echo "- Cleaning-up Data Directory"
 echo ""

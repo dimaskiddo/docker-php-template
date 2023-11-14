@@ -20,66 +20,29 @@ Standard deployment:
 ```
 git clone -b master https://github.com/dimaskiddo/docker-php-template.git .
 ```
-* Change environment variables in ```env/dev``` directory
+* Change environment variables in ```env``` directory
 * Prepare PHP deployment
 ```
 chmod +x prepare.sh
 ./prepare.sh
 ```
-* Goto ```deploy``` directory
-```
-cd deploy
-```
 * Build services image
 ```
-docker-compose build
+docker compose build node web
 ```
 * Start PHP environment services
 ```
-docker-compose up -d web
+docker compose up -d mariadb redis minio adminer
+docker compose up -d node web
 ```
-
-Additional deployment:
-* Start additional services like NodeJS and MinIO
-```
-docker-compose up -d node minio
-```
-* Check running services information
-```
-docker-compose ps
-```
-
-Stopping services:
-* Stop all services
-```
-docker-compose stop
-```
-* Stop specific service
-```
-docker-compose stop <service_name>
-```
-
-Destroying services:
-* Destroying services only
-```
-docker-compose down
-```
-* Destroying services and remove all images
-```
-docker-compose down --rmi all
-```
-
-### Deployment for Production
-
-Before doing the same step like in development, for production environment please change any environment variable in ```env/custom``` directory first and also uncomment the override settings in ```deploy/docker-compose.override.yml``` file
 
 ### Accessing Services
 
 * PHP service will be available in
-  - http request: http://localhost or http://127.0.0.1
-  - https request: https://localhost or https://127.0.0.1
-* Adminer service will be available in
   - http request: http://localhost:8080 or http://127.0.0.1:8080
+  - https request: https://localhost:8443 or https://127.0.0.1:8443
+* Adminer service will be available in
+  - http request: http://localhost:3000 or http://127.0.0.1:3000
 * MinIO service will be available in
   - http request: http://localhost:9000 or http://127.0.0.1:9000
 
