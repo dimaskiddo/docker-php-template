@@ -57,7 +57,7 @@ services:
 
   node:
     build:
-      context: ./build/node
+      context: ./app/node
       dockerfile: ./Dockerfile
     image: 'app:node'
     working_dir: /usr/src/app
@@ -69,7 +69,7 @@ services:
 
   web:
     build:
-      context: ./build/web
+      context: ./app/web
       dockerfile: ./Dockerfile
     image: 'app:web'
     working_dir: /var/www/html

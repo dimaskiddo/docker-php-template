@@ -6,7 +6,9 @@ USER root
 
 # Do Some Customization if Needed Here
 RUN apt-get -y update \
-    && apt-get -y dist-upgrade
+    && apt-get -y dist-upgrade \
+    && apt-get -y install \
+        curl
 
 # Run as Non-Root User
 USER user
